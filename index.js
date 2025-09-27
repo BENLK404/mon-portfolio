@@ -2,17 +2,10 @@ let darkMode = true;
 let currentLanguage = 'fr';
 
 // SVG icônes pour le toggle de thème
-const sunSVG = `
-<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-sun-fill">
-    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-</svg>
-`;
-
-const moonSVG = `
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-</svg>
-`;
+const sunSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm8 8h3v-1h-3v1zm-9 9h1v-3h-1v3zm7.24-2.84l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM4.22 19.02l1.79-1.8-1.41-1.41-1.8 1.79 1.42 1.42zM1 13h3v-1H1v1zm11-9a7 7 0 100 14 7 7 0 000-14z"/></svg>`;
+const moonSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+const frSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><rect width="8" height="24" x="0" fill="#0055A4"/><rect width="8" height="24" x="8" fill="#fff"/><rect width="8" height="24" x="16" fill="#EF4135"/></svg>`;
+const enSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path fill="#012169" d="M0 0h24v24H0z"/><path fill="#FFF" d="M24 0v3.2L15.2 12 24 20.8V24h-3.2L12 15.2 3.2 24H0v-3.2L8.8 12 0 3.2V0h3.2L12 8.8 20.8 0H24z"/><path fill="#C8102E" d="M24 10.4v3.2H13.6V24h-3.2V13.6H0v-3.2h10.4V0h3.2v10.4H24z"/></svg>`;
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
@@ -1028,7 +1021,191 @@ document.addEventListener('DOMContentLoaded', function() {
         initFooter();
     }, 1500);
 });
+function initScrollAppBar() {
+    const appBar = document.getElementById('scrollAppBar');
+    const progressBar = document.getElementById('scrollProgress');
+    const navItems = document.querySelectorAll('.nav-item');
+    let lastScrollTop = 0;
+    let isAppBarVisible = false;
 
+    function updateScrollProgress() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = progress + '%';
+    }
+
+    function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Show appbar after scrolling 100px
+        if (scrollTop > 100 && !isAppBarVisible) {
+            appBar.classList.add('visible');
+            isAppBarVisible = true;
+        } else if (scrollTop <= 100 && isAppBarVisible) {
+            appBar.classList.remove('visible');
+            isAppBarVisible = false;
+        }
+
+        // Update progress bar
+        updateScrollProgress();
+
+        // Update active nav item based on scroll position
+        updateActiveNavItem();
+
+        lastScrollTop = scrollTop;
+    }
+
+    function updateActiveNavItem() {
+        const sections = document.querySelectorAll('.demo-section');
+        let currentSection = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 200;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const scrollPos = window.pageYOffset;
+
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                currentSection = section.id;
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === '#' + currentSection) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Smooth scroll for navigation links
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Initial call
+    handleScroll();
+}
+
+// Utility functions
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function toggleLanguage() {
+    const elementsWithLang = document.querySelectorAll('[data-fr][data-en]');
+
+    if (currentLanguage === 'fr') {
+        currentLanguage = 'en';
+        document.documentElement.lang = 'en';
+        elementsWithLang.forEach(element => {
+            element.textContent = element.getAttribute('data-en');
+        });
+    } else {
+        currentLanguage = 'fr';
+        document.documentElement.lang = 'fr';
+        elementsWithLang.forEach(element => {
+            element.textContent = element.getAttribute('data-fr');
+        });
+    }
+}
+
+function toggleTheme() {
+    if (darkMode) {
+        document.body.setAttribute('data-theme', 'light');
+        darkMode = false;
+    } else {
+        document.body.removeAttribute('data-theme');
+        darkMode = true;
+    }
+}
+
+function toggleMobileMenu() {
+    const nav = document.getElementById('appbarNav');
+    nav.classList.toggle('mobile-open');
+}
+
+// Ripple effect for buttons
+function addRippleEffect() {
+    document.querySelectorAll('.appbar-btn, .nav-item').forEach(element => {
+        element.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.6);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.remove();
+                }
+            }, 600);
+        });
+    });
+}
+
+// Add ripple animation CSS
+const style = document.createElement('style');
+style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+document.head.appendChild(style);
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initScrollAppBar();
+    addRippleEffect();
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const nav = document.getElementById('appbarNav');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+
+        if (nav.classList.contains('mobile-open') &&
+            !nav.contains(e.target) &&
+            !menuBtn.contains(e.target)) {
+            nav.classList.remove('mobile-open');
+        }
+    });
+});
 // Console welcome message
 console.log('%c🚀 Bernard Kpedzi Full Stack Portfolio', 'font-size: 16px; color: #6366f1; font-weight: bold;');
 console.log('%c💡 Technologies: JavaScript • Java • Flutter', 'font-size: 12px; color: #f89820;');
