@@ -609,6 +609,426 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initAdvancedFeatures, 1000);
 });
 
+// Footer JavaScript - À ajouter dans index.js
+
+// Footer animations and interactions
+function initFooterAnimations() {
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animate footer sections
+                const footerSections = entry.target.querySelectorAll('.footer-section');
+                footerSections.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }, index * 150);
+                });
+
+                // Animate tech stack tags
+                const techTags = entry.target.querySelectorAll('.footer-tech');
+                techTags.forEach((tag, index) => {
+                    setTimeout(() => {
+                        tag.style.opacity = '1';
+                        tag.style.transform = 'scale(1)';
+                    }, (index * 100) + 500);
+                });
+            }
+        });
+    }, { threshold: 0.2 });
+
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        // Set initial states
+        const footerSections = footer.querySelectorAll('.footer-section');
+        footerSections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease';
+        });
+
+        const techTags = footer.querySelectorAll('.footer-tech');
+        techTags.forEach(tag => {
+            tag.style.opacity = '0';
+            tag.style.transform = 'scale(0.8)';
+            tag.style.transition = 'all 0.4s ease';
+        });
+
+        footerObserver.observe(footer);
+    }
+}
+
+// Footer interactive effects
+function addFooterInteractivity() {
+    // Hover effects for footer links
+    const footerLinks = document.querySelectorAll('.footer-link');
+    footerLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(8px) scale(1.02)';
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0) scale(1)';
+        });
+    });
+
+    // Tech stack tag interactions
+    const techTags = document.querySelectorAll('.footer-tech');
+    techTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.style.cssText = `
+                position: absolute;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: rippleAnimation 0.6s ease-out;
+                left: 50%;
+                top: 50%;
+                width: 20px;
+                height: 20px;
+                margin-left: -10px;
+                margin-top: -10px;
+                pointer-events: none;
+            `;
+
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.remove();
+                }
+            }, 600);
+
+            // Show tech info toast
+            const techName = this.textContent;
+            showTechToast(techName);
+        });
+    });
+
+    // Quote animation on hover
+    const quoteContent = document.querySelector('.quote-content');
+    if (quoteContent) {
+        quoteContent.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+            this.style.background = 'rgba(99, 102, 241, 0.05)';
+        });
+
+        quoteContent.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.background = 'rgba(255, 255, 255, 0.03)';
+            if (document.body.hasAttribute('data-theme')) {
+                this.style.background = 'rgba(0, 0, 0, 0.02)';
+            }
+        });
+    }
+}
+
+// Show tech information toast
+function showTechToast(techName) {
+    const techInfo = {
+        'React': currentLanguage === 'fr' ? 'Bibliothèque JavaScript pour interfaces utilisateur' : 'JavaScript library for user interfaces',
+        'Java': currentLanguage === 'fr' ? 'Langage de programmation orienté objet' : 'Object-oriented programming language',
+        'Flutter': currentLanguage === 'fr' ? 'Framework mobile cross-platform de Google' : 'Google\'s cross-platform mobile framework',
+        'Spring Boot': currentLanguage === 'fr' ? 'Framework Java pour applications web' : 'Java framework for web applications',
+        'Node.js': currentLanguage === 'fr' ? 'Runtime JavaScript côté serveur' : 'Server-side JavaScript runtime',
+        'Vue.js': currentLanguage === 'fr' ? 'Framework JavaScript progressif' : 'Progressive JavaScript framework'
+    };
+
+    const message = techInfo[techName] || techName;
+    showToast(`${techName}: ${message}`);
+}
+
+// Footer contact form enhancement
+function enhanceFooterContacts() {
+    const emailLink = document.querySelector('.footer-link[href^="mailto:"]');
+    if (emailLink) {
+        emailLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showAdvancedContactModal();
+        });
+    }
+
+    const phoneLink = document.querySelector('.footer-link[href^="tel:"]');
+    if (phoneLink) {
+        phoneLink.addEventListener('click', function() {
+            showToast(currentLanguage === 'fr' ? 'Numéro copié dans le presse-papier' : 'Phone number copied to clipboard');
+
+            // Copy to clipboard
+            const phoneNumber = this.textContent.trim();
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(phoneNumber);
+            }
+        });
+    }
+}
+
+// Advanced contact modal with footer integration
+function showAdvancedContactModal() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(15px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+
+    const form = document.createElement('div');
+    form.style.cssText = `
+        background: var(--bg-card);
+        padding: 2.5rem;
+        border-radius: 24px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 85vh;
+        overflow-y: auto;
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    `;
+
+    form.innerHTML = `
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                <svg style="width: 32px; height: 32px; color: white;" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </div>
+            <h3 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.8rem; font-weight: 700;">
+                ${currentLanguage === 'fr' ? 'Contactez-moi' : 'Contact Me'}
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 1rem;">
+                ${currentLanguage === 'fr' ? 'Discutons de votre prochain projet' : 'Let\'s discuss your next project'}
+            </p>
+        </div>
+        
+        <form id="advanced-contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <input type="text" name="firstName" placeholder="${currentLanguage === 'fr' ? 'Prénom' : 'First Name'}" required
+                       style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s ease;">
+                <input type="text" name="lastName" placeholder="${currentLanguage === 'fr' ? 'Nom' : 'Last Name'}" required
+                       style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s ease;">
+            </div>
+            
+            <input type="email" name="email" placeholder="${currentLanguage === 'fr' ? 'Adresse email' : 'Email Address'}" required
+                   style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s ease;">
+            
+            <select name="projectType" required
+                    style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem;">
+                <option value="">${currentLanguage === 'fr' ? 'Type de projet' : 'Project Type'}</option>
+                <option value="web">${currentLanguage === 'fr' ? 'Application Web' : 'Web Application'}</option>
+                <option value="mobile">${currentLanguage === 'fr' ? 'Application Mobile' : 'Mobile Application'}</option>
+                <option value="fullstack">${currentLanguage === 'fr' ? 'Full Stack' : 'Full Stack'}</option>
+                <option value="consulting">${currentLanguage === 'fr' ? 'Consultation' : 'Consulting'}</option>
+            </select>
+            
+            <textarea name="message" placeholder="${currentLanguage === 'fr' ? 'Décrivez votre projet...' : 'Describe your project...'}" rows="5" required
+                      style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); resize: vertical; font-size: 1rem; line-height: 1.5; transition: border-color 0.3s ease;"></textarea>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <button type="submit" style="flex: 1; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: transform 0.2s ease;">
+                    <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <svg style="width: 20px; height: 20px;" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                        ${currentLanguage === 'fr' ? 'Envoyer le message' : 'Send Message'}
+                    </span>
+                </button>
+                <button type="button" class="cancel-btn" style="padding: 15px; background: var(--bg-secondary); color: var(--text-secondary); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; min-width: 120px;">
+                    ${currentLanguage === 'fr' ? 'Annuler' : 'Cancel'}
+                </button>
+            </div>
+        </form>
+    `;
+
+    modal.appendChild(form);
+    document.body.appendChild(modal);
+
+    // Animate in
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        form.style.transform = 'scale(1)';
+    }, 10);
+
+    // Enhanced form interactions
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--primary)';
+            this.style.boxShadow = '0 0 0 3px rgba(99, 102, 241, 0.1)';
+        });
+
+        input.addEventListener('blur', function() {
+            this.style.borderColor = 'var(--border)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // Close modal events
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    form.querySelector('.cancel-btn').addEventListener('click', closeModal);
+
+    function closeModal() {
+        modal.style.opacity = '0';
+        form.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            if (document.body.contains(modal)) {
+                modal.remove();
+            }
+        }, 300);
+    }
+
+    // Form submission
+    document.getElementById('advanced-contact-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalContent = submitBtn.innerHTML;
+
+        // Loading state
+        submitBtn.innerHTML = `
+            <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                <svg style="width: 20px; height: 20px; animation: spin 1s linear infinite;" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"/>
+                </svg>
+                ${currentLanguage === 'fr' ? 'Envoi en cours...' : 'Sending...'}
+            </span>
+        `;
+        submitBtn.disabled = true;
+
+        // Simulate form submission
+        setTimeout(() => {
+            showToast(currentLanguage === 'fr' ? 'Message envoyé avec succès! Je vous répondrai bientôt.' : 'Message sent successfully! I\'ll get back to you soon.');
+            closeModal();
+        }, 2000);
+    });
+
+    // Add spin animation for loading
+    if (!document.getElementById('spin-animation')) {
+        const style = document.createElement('style');
+        style.id = 'spin-animation';
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Status indicator animation
+function animateStatusIndicator() {
+    const statusDot = document.querySelector('.status-dot');
+    if (statusDot) {
+        setInterval(() => {
+            statusDot.style.boxShadow = '0 0 10px var(--success)';
+            setTimeout(() => {
+                statusDot.style.boxShadow = '';
+            }, 500);
+        }, 3000);
+    }
+}
+
+// Footer scroll to top functionality
+function addScrollToTop() {
+    const footer = document.querySelector('.footer');
+    if (!footer) return;
+
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = `
+        <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+            <path d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z"/>
+        </svg>
+    `;
+    scrollTopBtn.style.cssText = `
+        position: fixed;
+        bottom: 150px;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, var(--accent), var(--success));
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(6, 214, 160, 0.4);
+        transition: all 0.3s ease;
+        z-index: 999;
+        opacity: 0;
+        transform: scale(0.8);
+    `;
+
+    document.body.appendChild(scrollTopBtn);
+
+    // Show/hide button based on scroll position
+    const toggleScrollBtn = () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.opacity = '1';
+            scrollTopBtn.style.transform = 'scale(1)';
+        } else {
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.transform = 'scale(0.8)';
+        }
+    };
+
+    window.addEventListener('scroll', toggleScrollBtn);
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    scrollTopBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.boxShadow = '0 6px 30px rgba(6, 214, 160, 0.6)';
+    });
+
+    scrollTopBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = '0 4px 20px rgba(6, 214, 160, 0.4)';
+    });
+}
+
+// Initialize all footer features
+function initFooter() {
+    initFooterAnimations();
+    addFooterInteractivity();
+    enhanceFooterContacts();
+    animateStatusIndicator();
+    addScrollToTop();
+}
+
+// Add to main initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    setTimeout(() => {
+        initFooter();
+    }, 1500);
+});
+
 // Console welcome message
 console.log('%c🚀 Bernard Kpedzi Full Stack Portfolio', 'font-size: 16px; color: #6366f1; font-weight: bold;');
 console.log('%c💡 Technologies: JavaScript • Java • Flutter', 'font-size: 12px; color: #f89820;');
