@@ -1,89 +1,222 @@
+// ========================================
+// BERNARD KPEDZI PORTFOLIO - MAIN JS FILE
+// ========================================
+
 let darkMode = true;
 let currentLanguage = 'fr';
 
-// SVG icônes pour le toggle de thème
-const sunSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm8 8h3v-1h-3v1zm-9 9h1v-3h-1v3zm7.24-2.84l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM4.22 19.02l1.79-1.8-1.41-1.41-1.8 1.79 1.42 1.42zM1 13h3v-1H1v1zm11-9a7 7 0 100 14 7 7 0 000-14z"/></svg>`;
-const moonSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-const frSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><rect width="8" height="24" x="0" fill="#0055A4"/><rect width="8" height="24" x="8" fill="#fff"/><rect width="8" height="24" x="16" fill="#EF4135"/></svg>`;
-const enSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path fill="#012169" d="M0 0h24v24H0z"/><path fill="#FFF" d="M24 0v3.2L15.2 12 24 20.8V24h-3.2L12 15.2 3.2 24H0v-3.2L8.8 12 0 3.2V0h3.2L12 8.8 20.8 0H24z"/><path fill="#C8102E" d="M24 10.4v3.2H13.6V24h-3.2V13.6H0v-3.2h10.4V0h3.2v10.4H24z"/></svg>`;
+// SVG Icons définitions
+const sunSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C12.4142 1.25 12.75 1.58579 12.75 2V3C12.75 3.41421 12.4142 3.75 12 3.75C11.5858 3.75 11.25 3.41421 11.25 3V2C11.25 1.58579 11.5858 1.25 12 1.25ZM4.39861 4.39861C4.6915 4.10572 5.16638 4.10572 5.45927 4.39861L5.85211 4.79145C6.145 5.08434 6.145 5.55921 5.85211 5.85211C5.55921 6.145 5.08434 6.145 4.79145 5.85211L4.39861 5.45927C4.10572 5.16638 4.10572 4.6915 4.39861 4.39861ZM19.6011 4.39887C19.894 4.69176 19.894 5.16664 19.6011 5.45953L19.2083 5.85237C18.9154 6.14526 18.4405 6.14526 18.1476 5.85237C17.8547 5.55947 17.8547 5.0846 18.1476 4.79171L18.5405 4.39887C18.8334 4.10598 19.3082 4.10598 19.6011 4.39887ZM1.25 12C1.25 11.5858 1.58579 11.25 2 11.25H3C3.41421 11.25 3.75 11.5858 3.75 12C3.75 12.4142 3.41421 12.75 3 12.75H2C1.58579 12.75 1.25 12.4142 1.25 12ZM20.25 12C20.25 11.5858 20.5858 11.25 21 11.25H22C22.4142 11.25 22.75 11.5858 22.75 12C22.75 12.4142 22.4142 12.75 22 12.75H21C20.5858 12.75 20.25 12.4142 20.25 12ZM18.1476 18.1476C18.4405 17.8547 18.9154 17.8547 19.2083 18.1476L19.6011 18.5405C19.894 18.8334 19.894 19.3082 19.6011 19.6011C19.3082 19.894 18.8334 19.894 18.5405 19.6011L18.1476 19.2083C17.8547 18.9154 17.8547 18.4405 18.1476 18.1476ZM5.85211 18.1479C6.145 18.4408 6.145 18.9157 5.85211 19.2086L5.45927 19.6014C5.16638 19.8943 4.6915 19.8943 4.39861 19.6014C4.10572 19.3085 4.10572 18.8336 4.39861 18.5407L4.79145 18.1479C5.08434 17.855 5.55921 17.855 5.85211 18.1479ZM12 20.25C12.4142 20.25 12.75 20.5858 12.75 21V22C12.75 22.4142 12.4142 22.75 12 22.75C11.5858 22.75 11.25 22.4142 11.25 22V21C11.25 20.5858 11.5858 20.25 12 20.25Z" fill="#000000"></path></svg>`;
 
-// Initialize application
+const moonSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path></svg>`;
+
+const frSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><rect width="8" height="24" x="0" fill="#0055A4"/><rect width="8" height="24" x="8" fill="#fff"/><rect width="8" height="24" x="16" fill="#EF4135"/></svg>`;
+
+const enSVG = `<svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#FFFFFF;" d="M395.901,7.286H116.099C56.003,7.286,7.286,56.004,7.286,116.099v279.803 c0,60.095,48.717,108.812,108.812,108.812h279.803c60.095,0,108.812-48.717,108.812-108.812V116.099 C504.714,56.004,455.997,7.286,395.901,7.286z"></path> <polygon style="fill:#ED1F34;" points="504.714,231.958 280.042,231.958 280.042,7.286 231.958,7.286 231.958,231.958 7.286,231.958 7.286,280.042 231.958,280.042 231.958,504.714 280.042,504.714 280.042,280.042 504.714,280.042 "></polygon> <path d="M395.901,0H116.099C52.082,0,0,52.082,0,116.099v279.803C0,459.918,52.082,512,116.099,512h279.803 C459.918,512,512,459.918,512,395.901V116.099C512,52.082,459.918,0,395.901,0z M497.427,116.099v108.572H287.329V14.573h108.573 C451.883,14.573,497.427,60.118,497.427,116.099z M116.099,14.573h108.573v210.098H14.573V116.099 C14.573,60.118,60.117,14.573,116.099,14.573z M14.573,395.901V287.329h210.098v210.098H116.099 C60.117,497.427,14.573,451.882,14.573,395.901z M395.901,497.427H287.329V287.329H438.39c4.024,0,7.287-3.262,7.287-7.286 c0-4.025-3.262-7.286-7.287-7.286H280.042c-4.024,0-7.286,3.262-7.286,7.286v217.384h-33.511V280.043 c0-4.025-3.262-7.286-7.286-7.286H14.573v-33.512h217.385c4.024,0,7.286-3.262,7.286-7.286V14.573h33.511v217.384 c0,4.025,3.262,7.286,7.286,7.286h217.385v33.512h-25.875c-4.024,0-7.286,3.262-7.286,7.286c0,4.025,3.262,7.286,7.286,7.286h25.875 v108.572C497.427,451.882,451.883,497.427,395.901,497.427z"></path> </g></svg>`;
+
+// ========================================
+// INITIALIZATION
+// ========================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme based on system preference or saved preference
+    // Charger les préférences sauvegardées
+    loadSavedPreferences();
+
+    // Initialiser toutes les fonctionnalités
+    initScrollAppBar();
+    initScrollAnimations();
+    addTypingEffect();
+    createParticleBackground();
+    addSmoothScrolling();
+    addInteractiveEffects();
+    addRippleEffect();
+
+    // Initialiser les fonctionnalités avancées après un délai
+    setTimeout(() => {
+        initAdvancedFeatures();
+        initFooter();
+    }, 1000);
+
+    // Gestion du menu mobile
+    initMobileMenuHandling();
+
+    // Message de bienvenue dans la console
+    displayConsoleWelcome();
+});
+
+// ========================================
+// PREFERENCES MANAGEMENT
+// ========================================
+function loadSavedPreferences() {
+    // Charger le thème sauvegardé
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
-        toggleTheme();
+        darkMode = false;
+        document.body.setAttribute('data-theme', 'light');
     }
 
-    // Initialize language
+    // Charger la langue sauvegardée
     const savedLanguage = localStorage.getItem('language') || 'fr';
-    if (savedLanguage !== currentLanguage) {
-        toggleLanguage();
-    }
+    currentLanguage = savedLanguage;
 
-    // Add scroll animations
-    initScrollAnimations();
+    // Appliquer les préférences
+    updateThemeIcon();
+    updateLanguageIcon();
+    updateLanguageContent();
+}
 
-    // Add typing effect to name
-    addTypingEffect();
-
-    // Add particle background
-    createParticleBackground();
-
-    // Add smooth scrolling
-    addSmoothScrolling();
-
-    // Add interactive hover effects
-    addInteractiveEffects();
-});
-
-// Theme toggle functionality
+// ========================================
+// THEME TOGGLE FUNCTIONALITY
+// ========================================
 function toggleTheme() {
     const body = document.body;
-    const themeButton = document.querySelector('.fab[onclick="toggleTheme()"]');
 
     if (darkMode) {
         body.setAttribute('data-theme', 'light');
-        if (themeButton) themeButton.innerHTML = sunSVG;
         darkMode = false;
         localStorage.setItem('theme', 'light');
     } else {
         body.removeAttribute('data-theme');
-        if (themeButton) themeButton.innerHTML = moonSVG;
         darkMode = true;
         localStorage.setItem('theme', 'dark');
     }
+
+    updateThemeIcon();
 }
 
-// Language toggle functionality
-function toggleLanguage() {
-    const langButton = document.querySelector('.fab.lang');
-    const elementsWithLang = document.querySelectorAll('[data-fr][data-en]');
+function updateThemeIcon() {
+    const themeButtons = document.querySelectorAll('button[onclick="toggleTheme()"]');
+    themeButtons.forEach(button => {
+        const svg = button.querySelector('svg');
+        if (svg) {
+            svg.outerHTML = darkMode ? moonSVG : sunSVG;
+        }
+    });
+}
 
+// ========================================
+// LANGUAGE TOGGLE FUNCTIONALITY
+// ========================================
+function toggleLanguage() {
     if (currentLanguage === 'fr') {
         currentLanguage = 'en';
-        if (langButton) langButton.textContent = 'EN';
         document.documentElement.lang = 'en';
-
-        elementsWithLang.forEach(element => {
-            element.textContent = element.getAttribute('data-en');
-        });
     } else {
         currentLanguage = 'fr';
-        if (langButton) langButton.textContent = 'FR';
         document.documentElement.lang = 'fr';
-
-        elementsWithLang.forEach(element => {
-            element.textContent = element.getAttribute('data-fr');
-        });
     }
 
     localStorage.setItem('language', currentLanguage);
+    updateLanguageIcon();
+    updateLanguageContent();
 }
 
-// Scroll animations
+function updateLanguageIcon() {
+    const languageButtons = document.querySelectorAll('button[onclick="toggleLanguage()"]');
+    languageButtons.forEach(button => {
+        const svg = button.querySelector('svg');
+        if (svg) {
+            svg.outerHTML = currentLanguage === 'fr' ? frSVG : enSVG;
+        }
+    });
+}
+
+function updateLanguageContent() {
+    const elementsWithLang = document.querySelectorAll('[data-fr][data-en]');
+    elementsWithLang.forEach(element => {
+        if (currentLanguage === 'fr') {
+            element.textContent = element.getAttribute('data-fr');
+        } else {
+            element.textContent = element.getAttribute('data-en');
+        }
+    });
+}
+
+// ========================================
+// SCROLL APPBAR FUNCTIONALITY
+// ========================================
+function initScrollAppBar() {
+    const appBar = document.getElementById('scrollAppBar');
+    const progressBar = document.getElementById('scrollProgress');
+    const navItems = document.querySelectorAll('.nav-item');
+    let isAppBarVisible = false;
+
+    function updateScrollProgress() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+        if (progressBar) {
+            progressBar.style.width = progress + '%';
+        }
+    }
+
+    function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Afficher/masquer l'AppBar
+        if (scrollTop > 100 && !isAppBarVisible && appBar) {
+            appBar.classList.add('visible');
+            isAppBarVisible = true;
+        } else if (scrollTop <= 100 && isAppBarVisible && appBar) {
+            appBar.classList.remove('visible');
+            isAppBarVisible = false;
+        }
+
+        // Mettre à jour la barre de progression
+        updateScrollProgress();
+
+        // Mettre à jour la navigation active
+        updateActiveNavItem();
+    }
+
+    function updateActiveNavItem() {
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 200;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const scrollPos = window.pageYOffset;
+
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                currentSection = section.id;
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === '#' + currentSection) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Navigation smooth scroll
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Event listener pour le scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Appel initial
+}
+
+// ========================================
+// SCROLL ANIMATIONS
+// ========================================
 function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -99,7 +232,7 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    // Observe all cards
+    // Observer toutes les cartes
     document.querySelectorAll('.card').forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
@@ -107,15 +240,17 @@ function initScrollAnimations() {
         observer.observe(card);
     });
 
-    // Observe project cards for staggered animation
+    // Animation décalée pour les cartes de projets
     document.querySelectorAll('.project-card').forEach((card, index) => {
         card.style.transitionDelay = `${index * 0.1}s`;
     });
 }
 
-// Typing effect for name
+// ========================================
+// TYPING EFFECT
+// ========================================
 function addTypingEffect() {
-    const nameElement = document.querySelector('.name');
+    const nameElement = document.querySelector('.hero-title, .name');
     if (!nameElement) return;
 
     const originalText = nameElement.textContent;
@@ -142,22 +277,29 @@ function addTypingEffect() {
     });
 }
 
-// Particle background
+// ========================================
+// PARTICLE BACKGROUND
+// ========================================
 function createParticleBackground() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '-1';
-    canvas.style.opacity = '0.1';
+
+    // Configuration du canvas
+    canvas.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.1;
+    `;
     document.body.appendChild(canvas);
 
     let particles = [];
     const particleCount = 50;
+    const colors = ['#6366f1', '#f89820', '#0175c2'];
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -173,7 +315,7 @@ function createParticleBackground() {
                 vx: (Math.random() - 0.5) * 0.5,
                 vy: (Math.random() - 0.5) * 0.5,
                 size: Math.random() * 3 + 1,
-                color: ['#6366f1', '#f89820', '#0175c2'][Math.floor(Math.random() * 3)]
+                color: colors[Math.floor(Math.random() * colors.length)]
             });
         }
     }
@@ -182,19 +324,22 @@ function createParticleBackground() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         particles.forEach(particle => {
+            // Mouvement des particules
             particle.x += particle.vx;
             particle.y += particle.vy;
 
+            // Rebond sur les bords
             if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
             if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
+            // Dessiner la particule
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             ctx.fillStyle = particle.color;
             ctx.fill();
         });
 
-        // Draw connections
+        // Dessiner les connexions
         particles.forEach((particle, i) => {
             particles.slice(i + 1).forEach(otherParticle => {
                 const dx = particle.x - otherParticle.x;
@@ -214,17 +359,21 @@ function createParticleBackground() {
         requestAnimationFrame(animateParticles);
     }
 
+    // Initialiser
     resizeCanvas();
     createParticles();
     animateParticles();
 
+    // Redimensionnement
     window.addEventListener('resize', () => {
         resizeCanvas();
         createParticles();
     });
 }
 
-// Smooth scrolling for internal links
+// ========================================
+// SMOOTH SCROLLING
+// ========================================
 function addSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -240,14 +389,115 @@ function addSmoothScrolling() {
     });
 }
 
-// Toast notification system
-function showToast(message) {
+// ========================================
+// INTERACTIVE EFFECTS
+// ========================================
+function addInteractiveEffects() {
+    // CSS pour les animations de ripple
+    if (!document.getElementById('ripple-styles')) {
+        const style = document.createElement('style');
+        style.id = 'ripple-styles';
+        style.textContent = `
+            @keyframes rippleAnimation {
+                0% { transform: scale(0); opacity: 1; }
+                100% { transform: scale(1); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Effets de survol
+    const hoverElements = document.querySelectorAll('.contact-item, .project-card, .tech-tag, .tech-category, .skill-tag');
+    hoverElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.02)';
+        });
+
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Effet ripple sur les boutons
+    const rippleElements = document.querySelectorAll('.appbar-btn, .contact-item, .fab');
+    rippleElements.forEach(button => {
+        button.addEventListener('click', function(e) {
+            createRippleEffect(e, this);
+        });
+    });
+}
+
+function createRippleEffect(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    `;
+
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+
+    setTimeout(() => {
+        if (ripple.parentNode) {
+            ripple.remove();
+        }
+    }, 600);
+}
+
+// ========================================
+// RIPPLE EFFECT FOR BUTTONS
+// ========================================
+function addRippleEffect() {
+    // CSS pour l'animation ripple
+    if (!document.getElementById('ripple-animation-css')) {
+        const style = document.createElement('style');
+        style.id = 'ripple-animation-css';
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Ajouter l'effet aux boutons
+    const buttons = document.querySelectorAll('.appbar-btn, .nav-item');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            createRippleEffect(e, this);
+        });
+    });
+}
+
+// ========================================
+// TOAST NOTIFICATION SYSTEM
+// ========================================
+function showToast(message, type = 'info') {
     const toast = document.createElement('div');
+    const bgColor = type === 'success' ? 'var(--success)' : 'var(--primary)';
+
     toast.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: linear-gradient(135deg, ${bgColor}, var(--secondary));
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 12px;
@@ -258,15 +508,16 @@ function showToast(message) {
         font-weight: 500;
         max-width: 300px;
     `;
+
     toast.textContent = message;
     document.body.appendChild(toast);
 
-    // Slide in
+    // Animation d'entrée
     setTimeout(() => {
         toast.style.transform = 'translateX(0)';
     }, 100);
 
-    // Slide out and remove
+    // Animation de sortie
     setTimeout(() => {
         toast.style.transform = 'translateX(100%)';
         setTimeout(() => {
@@ -277,73 +528,17 @@ function showToast(message) {
     }, 3000);
 }
 
-// Add interactive hover effects
-function addInteractiveEffects() {
-    // Add ripple animation CSS if not already present
-    if (!document.getElementById('ripple-styles')) {
-        const style = document.createElement('style');
-        style.id = 'ripple-styles';
-        style.textContent = `
-            @keyframes rippleAnimation {
-                0% {
-                    transform: scale(0);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(1);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    document.querySelectorAll('.contact-item, .project-card, .skill-tag, .tech-category').forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px) scale(1.02)';
-        });
-
-        element.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-
-    // Add ripple effect to buttons
-    document.querySelectorAll('.fab, .contact-item').forEach(button => {
-        button.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-
-            ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                background: rgba(255, 255, 255, 0.6);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: rippleAnimation 0.6s ease-out;
-                pointer-events: none;
-            `;
-
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.remove();
-                }
-            }, 600);
-        });
-    });
+// ========================================
+// ADVANCED FEATURES
+// ========================================
+function initAdvancedFeatures() {
+    initAdvancedSearch();
+    initContactForm();
+    animateSkillsProgress();
+    animateCounters();
 }
 
-// Skills progress animation
+// Animation des compétences
 function animateSkillsProgress() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -370,13 +565,13 @@ function animateSkillsProgress() {
     });
 }
 
-// Counter animation for achievements
+// Animation des compteurs
 function animateCounters() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target.querySelector('.achievement-number');
-                if (!counter) return;
+                if (!counter || counter.dataset.animated) return;
 
                 const target = counter.textContent;
                 const isNumber = target.match(/\d+/);
@@ -392,6 +587,7 @@ function animateCounters() {
                         if (current >= targetValue) {
                             counter.textContent = targetValue + suffix;
                             clearInterval(timer);
+                            counter.dataset.animated = 'true';
                         } else {
                             counter.textContent = Math.floor(current) + suffix;
                         }
@@ -406,98 +602,11 @@ function animateCounters() {
     });
 }
 
-// Contact form functionality
-function initContactForm() {
-    const emailLink = document.querySelector('a[href^="mailto:"]');
-    if (emailLink) {
-        emailLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showContactModal();
-        });
-    }
-}
-
-function showContactModal() {
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        backdrop-filter: blur(10px);
-    `;
-
-    const form = document.createElement('div');
-    form.style.cssText = `
-        background: var(--bg-card);
-        padding: 2rem;
-        border-radius: 20px;
-        max-width: 500px;
-        width: 90%;
-        max-height: 80vh;
-        overflow-y: auto;
-        border: 1px solid var(--border);
-    `;
-
-    form.innerHTML = `
-        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem;">
-            ${currentLanguage === 'fr' ? 'Me Contacter' : 'Contact Me'}
-        </h3>
-        <form id="contact-form" style="display: flex; flex-direction: column; gap: 1rem;">
-            <input type="text" name="name" placeholder="${currentLanguage === 'fr' ? 'Votre nom' : 'Your name'}" required
-                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
-            <input type="email" name="email" placeholder="${currentLanguage === 'fr' ? 'Votre email' : 'Your email'}" required
-                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
-            <input type="text" name="subject" placeholder="${currentLanguage === 'fr' ? 'Sujet' : 'Subject'}" required
-                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
-            <textarea name="message" placeholder="${currentLanguage === 'fr' ? 'Votre message' : 'Your message'}" rows="5" required
-                      style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); resize: vertical;"></textarea>
-            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <button type="submit" style="flex: 1; padding: 12px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
-                    ${currentLanguage === 'fr' ? 'Envoyer' : 'Send'}
-                </button>
-                <button type="button" class="cancel-btn" style="flex: 1; padding: 12px; background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">
-                    ${currentLanguage === 'fr' ? 'Annuler' : 'Cancel'}
-                </button>
-            </div>
-        </form>
-    `;
-
-    modal.className = 'modal';
-    modal.appendChild(form);
-    document.body.appendChild(modal);
-
-    // Close on backdrop click
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.remove();
-        }
-    });
-
-    // Cancel button
-    form.querySelector('.cancel-btn').addEventListener('click', () => {
-        modal.remove();
-    });
-
-    // Form submission
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        showToast(currentLanguage === 'fr' ? 'Message envoyé avec succès!' : 'Message sent successfully!');
-        modal.remove();
-    });
-}
-
-// Search functionality
+// Système de recherche avancée
 function initAdvancedSearch() {
     const searchInput = document.createElement('input');
     searchInput.type = 'text';
-    searchInput.placeholder = currentLanguage === 'fr' ? 'Rechercher...' : 'Search...';
+    searchInput.placeholder = currentLanguage === 'fr' ? 'Rechercher... (Ctrl+K)' : 'Search... (Ctrl+K)';
     searchInput.style.cssText = `
         position: fixed;
         top: 20px;
@@ -517,7 +626,7 @@ function initAdvancedSearch() {
 
     document.body.appendChild(searchInput);
 
-    // Show search on Ctrl+K or Cmd+K
+    // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
@@ -530,13 +639,12 @@ function initAdvancedSearch() {
             searchInput.style.transform = 'translateY(-100px)';
             searchInput.style.opacity = '0';
             searchInput.blur();
-            // Reset search
             searchInput.value = '';
             resetSearchHighlight();
         }
     });
 
-    // Search functionality
+    // Fonctionnalité de recherche
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
         performSearch(query);
@@ -544,7 +652,7 @@ function initAdvancedSearch() {
 }
 
 function performSearch(query) {
-    const searchableElements = document.querySelectorAll('.skill-tag, .tech-tag, .project-card, .job-title, .project-description');
+    const searchableElements = document.querySelectorAll('.tech-tag, .project-card, .experience-item');
 
     searchableElements.forEach(element => {
         const text = element.textContent.toLowerCase();
@@ -572,7 +680,7 @@ function performSearch(query) {
 }
 
 function resetSearchHighlight() {
-    const searchableElements = document.querySelectorAll('.skill-tag, .tech-tag, .project-card, .job-title, .project-description');
+    const searchableElements = document.querySelectorAll('.tech-tag, .project-card, .experience-item');
 
     searchableElements.forEach(element => {
         const parent = element.closest('.card, .project-card, .experience-item');
@@ -589,178 +697,18 @@ function resetElementHighlight(element) {
     element.style.color = '';
 }
 
-// Initialize all advanced features
-function initAdvancedFeatures() {
-    animateSkillsProgress();
-    animateCounters();
-    initAdvancedSearch();
-    initContactForm();
-}
-
-// Call advanced features after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initAdvancedFeatures, 1000);
-});
-
-// Footer JavaScript - À ajouter dans index.js
-
-// Footer animations and interactions
-function initFooterAnimations() {
-    const footerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Animate footer sections
-                const footerSections = entry.target.querySelectorAll('.footer-section');
-                footerSections.forEach((section, index) => {
-                    setTimeout(() => {
-                        section.style.opacity = '1';
-                        section.style.transform = 'translateY(0)';
-                    }, index * 150);
-                });
-
-                // Animate tech stack tags
-                const techTags = entry.target.querySelectorAll('.footer-tech');
-                techTags.forEach((tag, index) => {
-                    setTimeout(() => {
-                        tag.style.opacity = '1';
-                        tag.style.transform = 'scale(1)';
-                    }, (index * 100) + 500);
-                });
-            }
-        });
-    }, { threshold: 0.2 });
-
-    const footer = document.querySelector('.footer');
-    if (footer) {
-        // Set initial states
-        const footerSections = footer.querySelectorAll('.footer-section');
-        footerSections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'all 0.6s ease';
-        });
-
-        const techTags = footer.querySelectorAll('.footer-tech');
-        techTags.forEach(tag => {
-            tag.style.opacity = '0';
-            tag.style.transform = 'scale(0.8)';
-            tag.style.transition = 'all 0.4s ease';
-        });
-
-        footerObserver.observe(footer);
-    }
-}
-
-// Footer interactive effects
-function addFooterInteractivity() {
-    // Hover effects for footer links
-    const footerLinks = document.querySelectorAll('.footer-link');
-    footerLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(8px) scale(1.02)';
-        });
-
-        link.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0) scale(1)';
-        });
-    });
-
-    // Tech stack tag interactions
-    const techTags = document.querySelectorAll('.footer-tech');
-    techTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-            // Add ripple effect
-            const ripple = document.createElement('span');
-            ripple.style.cssText = `
-                position: absolute;
-                background: rgba(255, 255, 255, 0.6);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: rippleAnimation 0.6s ease-out;
-                left: 50%;
-                top: 50%;
-                width: 20px;
-                height: 20px;
-                margin-left: -10px;
-                margin-top: -10px;
-                pointer-events: none;
-            `;
-
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.remove();
-                }
-            }, 600);
-
-            // Show tech info toast
-            const techName = this.textContent;
-            showTechToast(techName);
-        });
-    });
-
-    // Quote animation on hover
-    const quoteContent = document.querySelector('.quote-content');
-    if (quoteContent) {
-        quoteContent.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.02)';
-            this.style.background = 'rgba(99, 102, 241, 0.05)';
-        });
-
-        quoteContent.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            this.style.background = 'rgba(255, 255, 255, 0.03)';
-            if (document.body.hasAttribute('data-theme')) {
-                this.style.background = 'rgba(0, 0, 0, 0.02)';
-            }
-        });
-    }
-}
-
-// Show tech information toast
-function showTechToast(techName) {
-    const techInfo = {
-        'React': currentLanguage === 'fr' ? 'Bibliothèque JavaScript pour interfaces utilisateur' : 'JavaScript library for user interfaces',
-        'Java': currentLanguage === 'fr' ? 'Langage de programmation orienté objet' : 'Object-oriented programming language',
-        'Flutter': currentLanguage === 'fr' ? 'Framework mobile cross-platform de Google' : 'Google\'s cross-platform mobile framework',
-        'Spring Boot': currentLanguage === 'fr' ? 'Framework Java pour applications web' : 'Java framework for web applications',
-        'Node.js': currentLanguage === 'fr' ? 'Runtime JavaScript côté serveur' : 'Server-side JavaScript runtime',
-        'Vue.js': currentLanguage === 'fr' ? 'Framework JavaScript progressif' : 'Progressive JavaScript framework'
-    };
-
-    const message = techInfo[techName] || techName;
-    showToast(`${techName}: ${message}`);
-}
-
-// Footer contact form enhancement
-function enhanceFooterContacts() {
-    const emailLink = document.querySelector('.footer-link[href^="mailto:"]');
-    if (emailLink) {
-        emailLink.addEventListener('click', function(e) {
+// Formulaire de contact
+function initContactForm() {
+    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+    emailLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            showAdvancedContactModal();
+            showContactModal();
         });
-    }
-
-    const phoneLink = document.querySelector('.footer-link[href^="tel:"]');
-    if (phoneLink) {
-        phoneLink.addEventListener('click', function() {
-            showToast(currentLanguage === 'fr' ? 'Numéro copié dans le presse-papier' : 'Phone number copied to clipboard');
-
-            // Copy to clipboard
-            const phoneNumber = this.textContent.trim();
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(phoneNumber);
-            }
-        });
-    }
+    });
 }
 
-// Advanced contact modal with footer integration
-function showAdvancedContactModal() {
+function showContactModal() {
     const modal = document.createElement('div');
     modal.style.cssText = `
         position: fixed;
@@ -768,12 +716,12 @@ function showAdvancedContactModal() {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.8);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 10000;
-        backdrop-filter: blur(15px);
+        backdrop-filter: blur(10px);
         opacity: 0;
         transition: opacity 0.3s ease;
     `;
@@ -781,66 +729,35 @@ function showAdvancedContactModal() {
     const form = document.createElement('div');
     form.style.cssText = `
         background: var(--bg-card);
-        padding: 2.5rem;
-        border-radius: 24px;
-        max-width: 600px;
+        padding: 2rem;
+        border-radius: 20px;
+        max-width: 500px;
         width: 90%;
-        max-height: 85vh;
+        max-height: 80vh;
         overflow-y: auto;
         border: 1px solid var(--border);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         transform: scale(0.9);
         transition: transform 0.3s ease;
     `;
 
     form.innerHTML = `
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
-                <svg style="width: 32px; height: 32px; color: white;" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-            </div>
-            <h3 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.8rem; font-weight: 700;">
-                ${currentLanguage === 'fr' ? 'Contactez-moi' : 'Contact Me'}
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 1rem;">
-                ${currentLanguage === 'fr' ? 'Discutons de votre prochain projet' : 'Let\'s discuss your next project'}
-            </p>
-        </div>
-        
-        <form id="advanced-contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <input type="text" name="firstName" placeholder="${currentLanguage === 'fr' ? 'Prénom' : 'First Name'}" required
-                       style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s ease;">
-                <input type="text" name="lastName" placeholder="${currentLanguage === 'fr' ? 'Nom' : 'Last Name'}" required
-                       style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s ease;">
-            </div>
-            
-            <input type="email" name="email" placeholder="${currentLanguage === 'fr' ? 'Adresse email' : 'Email Address'}" required
-                   style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s ease;">
-            
-            <select name="projectType" required
-                    style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem;">
-                <option value="">${currentLanguage === 'fr' ? 'Type de projet' : 'Project Type'}</option>
-                <option value="web">${currentLanguage === 'fr' ? 'Application Web' : 'Web Application'}</option>
-                <option value="mobile">${currentLanguage === 'fr' ? 'Application Mobile' : 'Mobile Application'}</option>
-                <option value="fullstack">${currentLanguage === 'fr' ? 'Full Stack' : 'Full Stack'}</option>
-                <option value="consulting">${currentLanguage === 'fr' ? 'Consultation' : 'Consulting'}</option>
-            </select>
-            
-            <textarea name="message" placeholder="${currentLanguage === 'fr' ? 'Décrivez votre projet...' : 'Describe your project...'}" rows="5" required
-                      style="padding: 15px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); resize: vertical; font-size: 1rem; line-height: 1.5; transition: border-color 0.3s ease;"></textarea>
-            
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem;">
+            ${currentLanguage === 'fr' ? 'Me Contacter' : 'Contact Me'}
+        </h3>
+        <form id="contact-form" style="display: flex; flex-direction: column; gap: 1rem;">
+            <input type="text" name="name" placeholder="${currentLanguage === 'fr' ? 'Votre nom' : 'Your name'}" required
+                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
+            <input type="email" name="email" placeholder="${currentLanguage === 'fr' ? 'Votre email' : 'Your email'}" required
+                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
+            <input type="text" name="subject" placeholder="${currentLanguage === 'fr' ? 'Sujet' : 'Subject'}" required
+                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
+            <textarea name="message" placeholder="${currentLanguage === 'fr' ? 'Votre message' : 'Your message'}" rows="5" required
+                      style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); resize: vertical;"></textarea>
             <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <button type="submit" style="flex: 1; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: transform 0.2s ease;">
-                    <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <svg style="width: 20px; height: 20px;" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                        </svg>
-                        ${currentLanguage === 'fr' ? 'Envoyer le message' : 'Send Message'}
-                    </span>
+                <button type="submit" style="flex: 1; padding: 12px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                    ${currentLanguage === 'fr' ? 'Envoyer' : 'Send'}
                 </button>
-                <button type="button" class="cancel-btn" style="padding: 15px; background: var(--bg-secondary); color: var(--text-secondary); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; min-width: 120px;">
+                <button type="button" onclick="closeContactModal()" style="flex: 1; padding: 12px; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border); border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
                     ${currentLanguage === 'fr' ? 'Annuler' : 'Cancel'}
                 </button>
             </div>
@@ -850,364 +767,387 @@ function showAdvancedContactModal() {
     modal.appendChild(form);
     document.body.appendChild(modal);
 
-    // Animate in
+    // Animation d'entrée
     setTimeout(() => {
         modal.style.opacity = '1';
         form.style.transform = 'scale(1)';
-    }, 10);
+    }, 100);
 
-    // Enhanced form interactions
-    const inputs = form.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.style.borderColor = 'var(--primary)';
-            this.style.boxShadow = '0 0 0 3px rgba(99, 102, 241, 0.1)';
-        });
-
-        input.addEventListener('blur', function() {
-            this.style.borderColor = 'var(--border)';
-            this.style.boxShadow = 'none';
-        });
-    });
-
-    // Close modal events
+    // Fermeture par clic sur le fond
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
-            closeModal();
+            closeContactModal();
         }
     });
 
-    form.querySelector('.cancel-btn').addEventListener('click', closeModal);
+    // Gestion du formulaire
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
 
-    function closeModal() {
+        // Simulation d'envoi
+        showToast(
+            currentLanguage === 'fr' ? 'Message envoyé avec succès!' : 'Message sent successfully!',
+            'success'
+        );
+
+        closeContactModal();
+    });
+
+    // Fonction globale pour fermer le modal
+    window.closeContactModal = function() {
         modal.style.opacity = '0';
         form.style.transform = 'scale(0.9)';
         setTimeout(() => {
             if (document.body.contains(modal)) {
-                modal.remove();
+                document.body.removeChild(modal);
             }
+            delete window.closeContactModal;
         }, 300);
+    };
+}
+
+// ========================================
+// MOBILE MENU HANDLING
+// ========================================
+function initMobileMenuHandling() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Fermer le menu en cliquant en dehors
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
     }
+}
 
-    // Form submission
-    document.getElementById('advanced-contact-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const submitBtn = e.target.querySelector('button[type="submit"]');
-        const originalContent = submitBtn.innerHTML;
+// ========================================
+// FOOTER INITIALIZATION
+// ========================================
+function initFooter() {
+    // Animation du footer au scroll
+    const footer = document.querySelector('footer');
+    if (footer) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    footer.style.opacity = '1';
+                    footer.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.3 });
 
-        // Loading state
-        submitBtn.innerHTML = `
-            <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                <svg style="width: 20px; height: 20px; animation: spin 1s linear infinite;" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"/>
-                </svg>
-                ${currentLanguage === 'fr' ? 'Envoi en cours...' : 'Sending...'}
-            </span>
-        `;
-        submitBtn.disabled = true;
+        footer.style.opacity = '0';
+        footer.style.transform = 'translateY(30px)';
+        footer.style.transition = 'all 0.8s ease';
+        observer.observe(footer);
+    }
+}
 
-        // Simulate form submission
-        setTimeout(() => {
-            showToast(currentLanguage === 'fr' ? 'Message envoyé avec succès! Je vous répondrai bientôt.' : 'Message sent successfully! I\'ll get back to you soon.');
-            closeModal();
-        }, 2000);
+// ========================================
+// CONSOLE WELCOME MESSAGE
+// ========================================
+function displayConsoleWelcome() {
+    const styles = {
+        title: 'color: #6366f1; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(99, 102, 241, 0.3);',
+        subtitle: 'color: #f89820; font-size: 16px; font-weight: 600;',
+        text: 'color: #0175c2; font-size: 14px;',
+        accent: 'color: #10b981; font-size: 12px; font-style: italic;'
+    };
+
+    console.log('%c🚀 BERNARD KPEDZI PORTFOLIO', styles.title);
+    console.log('%c✨ Développeur Full Stack | UI/UX Designer', styles.subtitle);
+    console.log('%c🔧 Technologies: React, Node.js, Python, Flutter...', styles.text);
+    console.log('%c💡 Toujours curieux d\'apprendre et de créer!', styles.accent);
+    console.log('%c📧 Contact: bernardkpedzi@gmail.com', styles.text);
+    console.log('%c🌐 Merci de visiter mon portfolio!', styles.accent);
+}
+
+// ========================================
+// KEYBOARD SHORTCUTS
+// ========================================
+function initKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + / pour afficher les raccourcis
+        if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+            e.preventDefault();
+            showShortcutsModal();
+        }
+
+        // Échap pour fermer les modals
+        if (e.key === 'Escape') {
+            const modals = document.querySelectorAll('.modal, .search-modal');
+            modals.forEach(modal => {
+                if (modal.style.display !== 'none') {
+                    modal.style.opacity = '0';
+                    setTimeout(() => modal.remove(), 300);
+                }
+            });
+        }
+
+        // Navigation avec les flèches
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            const sections = document.querySelectorAll('section[id]');
+            const currentSection = getCurrentSection();
+            const currentIndex = Array.from(sections).findIndex(section => section.id === currentSection);
+
+            if (currentIndex !== -1) {
+                let nextIndex;
+                if (e.key === 'ArrowUp') {
+                    nextIndex = currentIndex > 0 ? currentIndex - 1 : sections.length - 1;
+                } else {
+                    nextIndex = currentIndex < sections.length - 1 ? currentIndex + 1 : 0;
+                }
+
+                sections[nextIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+}
+
+function getCurrentSection() {
+    const sections = document.querySelectorAll('section[id]');
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const scrollPos = window.pageYOffset;
+
+        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+            currentSection = section.id;
+        }
     });
 
-    // Add spin animation for loading
-    if (!document.getElementById('spin-animation')) {
+    return currentSection;
+}
+
+function showShortcutsModal() {
+    const shortcuts = [
+        { key: 'Ctrl/Cmd + K', action: currentLanguage === 'fr' ? 'Rechercher' : 'Search' },
+        { key: 'Ctrl/Cmd + /', action: currentLanguage === 'fr' ? 'Afficher les raccourcis' : 'Show shortcuts' },
+        { key: '↑/↓', action: currentLanguage === 'fr' ? 'Navigation sections' : 'Navigate sections' },
+        { key: 'Échap', action: currentLanguage === 'fr' ? 'Fermer les modals' : 'Close modals' }
+    ];
+
+    const modal = document.createElement('div');
+    modal.className = 'modal shortcuts-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: var(--bg-card);
+        padding: 2rem;
+        border-radius: 20px;
+        max-width: 400px;
+        width: 90%;
+        border: 1px solid var(--border);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    `;
+
+    content.innerHTML = `
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem;">
+            ${currentLanguage === 'fr' ? 'Raccourcis Clavier' : 'Keyboard Shortcuts'}
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+            ${shortcuts.map(shortcut => `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <kbd style="background: var(--bg-secondary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; color: var(--text-secondary);">${shortcut.key}</kbd>
+                    <span style="color: var(--text-primary);">${shortcut.action}</span>
+                </div>
+            `).join('')}
+        </div>
+        <button onclick="this.closest('.modal').remove()" style="margin-top: 1.5rem; width: 100%; padding: 12px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">
+            ${currentLanguage === 'fr' ? 'Fermer' : 'Close'}
+        </button>
+    `;
+
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        content.style.transform = 'scale(1)';
+    }, 100);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+// ========================================
+// PERFORMANCE MONITORING
+// ========================================
+function initPerformanceMonitoring() {
+    // Monitor scroll performance
+    let ticking = false;
+
+    function updateOnScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                // Performance-optimized scroll handling
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', updateOnScroll, { passive: true });
+
+    // Monitor page load performance
+    window.addEventListener('load', () => {
+        const perfData = performance.getEntriesByType('navigation')[0];
+        if (perfData && process.env.NODE_ENV === 'development') {
+            console.log('🚀 Performance Metrics:');
+            console.log(`📊 DOM Content Loaded: ${perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart}ms`);
+            console.log(`⚡ Load Complete: ${perfData.loadEventEnd - perfData.loadEventStart}ms`);
+        }
+    });
+}
+
+// ========================================
+// ACCESSIBILITY FEATURES
+// ========================================
+function initAccessibilityFeatures() {
+    // Skip to main content
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main';
+    skipLink.textContent = currentLanguage === 'fr' ? 'Aller au contenu principal' : 'Skip to main content';
+    skipLink.style.cssText = `
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--primary);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 10000;
+        transition: top 0.3s;
+    `;
+
+    skipLink.addEventListener('focus', () => {
+        skipLink.style.top = '6px';
+    });
+
+    skipLink.addEventListener('blur', () => {
+        skipLink.style.top = '-40px';
+    });
+
+    document.body.insertBefore(skipLink, document.body.firstChild);
+
+    // Enhanced focus indicators
+    const style = document.createElement('style');
+    style.textContent = `
+        *:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        .focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const style = document.createElement('style');
-        style.id = 'spin-animation';
         style.textContent = `
-            @keyframes spin {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         `;
         document.head.appendChild(style);
     }
 }
 
-// Status indicator animation
-function animateStatusIndicator() {
-    const statusDot = document.querySelector('.status-dot');
-    if (statusDot) {
-        setInterval(() => {
-            statusDot.style.boxShadow = '0 0 10px var(--success)';
-            setTimeout(() => {
-                statusDot.style.boxShadow = '';
-            }, 500);
-        }, 3000);
-    }
-}
+// ========================================
+// ERROR HANDLING
+// ========================================
+function initErrorHandling() {
+    window.addEventListener('error', (e) => {
+        console.error('❌ JavaScript Error:', e.error);
 
-// Footer scroll to top functionality
-function addScrollToTop() {
-    const footer = document.querySelector('.footer');
-    if (!footer) return;
-
-    const scrollTopBtn = document.createElement('button');
-    scrollTopBtn.innerHTML = `
-        <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
-            <path d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z"/>
-        </svg>
-    `;
-    scrollTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 150px;
-        right: 2rem;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: none;
-        background: linear-gradient(135deg, var(--accent), var(--success));
-        color: white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 20px rgba(6, 214, 160, 0.4);
-        transition: all 0.3s ease;
-        z-index: 999;
-        opacity: 0;
-        transform: scale(0.8);
-    `;
-
-    document.body.appendChild(scrollTopBtn);
-
-    // Show/hide button based on scroll position
-    const toggleScrollBtn = () => {
-        if (window.pageYOffset > 300) {
-            scrollTopBtn.style.opacity = '1';
-            scrollTopBtn.style.transform = 'scale(1)';
-        } else {
-            scrollTopBtn.style.opacity = '0';
-            scrollTopBtn.style.transform = 'scale(0.8)';
+        // Show user-friendly error message in development
+        if (process.env.NODE_ENV === 'development') {
+            showToast(
+                currentLanguage === 'fr' ?
+                    'Une erreur s\'est produite. Vérifiez la console.' :
+                    'An error occurred. Check the console.',
+                'error'
+            );
         }
-    };
-
-    window.addEventListener('scroll', toggleScrollBtn);
-
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
     });
 
-    scrollTopBtn.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
-        this.style.boxShadow = '0 6px 30px rgba(6, 214, 160, 0.6)';
-    });
+    window.addEventListener('unhandledrejection', (e) => {
+        console.error('❌ Unhandled Promise Rejection:', e.reason);
 
-    scrollTopBtn.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-        this.style.boxShadow = '0 4px 20px rgba(6, 214, 160, 0.4)';
+        if (process.env.NODE_ENV === 'development') {
+            showToast(
+                currentLanguage === 'fr' ?
+                    'Erreur de promesse non gérée.' :
+                    'Unhandled promise error.',
+                'error'
+            );
+        }
     });
 }
 
-// Initialize all footer features
-function initFooter() {
-    initFooterAnimations();
-    addFooterInteractivity();
-    enhanceFooterContacts();
-    animateStatusIndicator();
-    addScrollToTop();
-}
-
-// Add to main initialization
+// ========================================
+// FINAL INITIALIZATION
+// ========================================
+// Initialize additional features after DOM load
 document.addEventListener('DOMContentLoaded', function() {
-    // ... existing code ...
+    // Initialize all additional features
     setTimeout(() => {
-        initFooter();
+        initKeyboardShortcuts();
+        initPerformanceMonitoring();
+        initAccessibilityFeatures();
+        initErrorHandling();
     }, 1500);
 });
-function initScrollAppBar() {
-    const appBar = document.getElementById('scrollAppBar');
-    const progressBar = document.getElementById('scrollProgress');
-    const navItems = document.querySelectorAll('.nav-item');
-    let lastScrollTop = 0;
-    let isAppBarVisible = false;
 
-    function updateScrollProgress() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / scrollHeight) * 100;
-        progressBar.style.width = progress + '%';
-    }
-
-    function handleScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Show appbar after scrolling 100px
-        if (scrollTop > 100 && !isAppBarVisible) {
-            appBar.classList.add('visible');
-            isAppBarVisible = true;
-        } else if (scrollTop <= 100 && isAppBarVisible) {
-            appBar.classList.remove('visible');
-            isAppBarVisible = false;
-        }
-
-        // Update progress bar
-        updateScrollProgress();
-
-        // Update active nav item based on scroll position
-        updateActiveNavItem();
-
-        lastScrollTop = scrollTop;
-    }
-
-    function updateActiveNavItem() {
-        const sections = document.querySelectorAll('.demo-section');
-        let currentSection = '';
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 200;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            const scrollPos = window.pageYOffset;
-
-            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                currentSection = section.id;
-            }
-        });
-
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === '#' + currentSection) {
-                item.classList.add('active');
-            }
-        });
-    }
-
-    // Smooth scroll for navigation links
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = item.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Initial call
-    handleScroll();
-}
-
-// Utility functions
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-function toggleLanguage() {
-    const elementsWithLang = document.querySelectorAll('[data-fr][data-en]');
-
-    if (currentLanguage === 'fr') {
-        currentLanguage = 'en';
-        document.documentElement.lang = 'en';
-        elementsWithLang.forEach(element => {
-            element.textContent = element.getAttribute('data-en');
-        });
-    } else {
-        currentLanguage = 'fr';
-        document.documentElement.lang = 'fr';
-        elementsWithLang.forEach(element => {
-            element.textContent = element.getAttribute('data-fr');
-        });
-    }
-}
-
-function toggleTheme() {
-    if (darkMode) {
-        document.body.setAttribute('data-theme', 'light');
-        darkMode = false;
-    } else {
-        document.body.removeAttribute('data-theme');
-        darkMode = true;
-    }
-}
-
-function toggleMobileMenu() {
-    const nav = document.getElementById('appbarNav');
-    nav.classList.toggle('mobile-open');
-}
-
-// Ripple effect for buttons
-function addRippleEffect() {
-    document.querySelectorAll('.appbar-btn, .nav-item').forEach(element => {
-        element.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-
-            ripple.style.cssText = `
-                        position: absolute;
-                        width: ${size}px;
-                        height: ${size}px;
-                        left: ${x}px;
-                        top: ${y}px;
-                        background: rgba(255, 255, 255, 0.6);
-                        border-radius: 50%;
-                        transform: scale(0);
-                        animation: ripple 0.6s ease-out;
-                        pointer-events: none;
-                    `;
-
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.remove();
-                }
-            }, 600);
-        });
-    });
-}
-
-// Add ripple animation CSS
-const style = document.createElement('style');
-style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-document.head.appendChild(style);
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initScrollAppBar();
-    addRippleEffect();
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        const nav = document.getElementById('appbarNav');
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-
-        if (nav.classList.contains('mobile-open') &&
-            !nav.contains(e.target) &&
-            !menuBtn.contains(e.target)) {
-            nav.classList.remove('mobile-open');
-        }
-    });
-});
-// Console welcome message
-console.log('%c🚀 Bernard Kpedzi Full Stack Portfolio', 'font-size: 16px; color: #6366f1; font-weight: bold;');
-console.log('%c💡 Technologies: JavaScript • Java • Flutter', 'font-size: 12px; color: #f89820;');
-console.log('%c🎯 Full Stack Developer - Frontend to Mobile', 'font-size: 12px; color: #0175c2;');
-console.log('%c⚡ Features: Search (Ctrl+K), Animations, Contact Modal', 'font-size: 12px; color: #06d6a0;');
+// ========================================
+// GLOBAL FUNCTIONS (for HTML onclick attributes)
+// ========================================
+// Make functions globally available for HTML onclick attributes
+window.toggleTheme = toggleTheme;
+window.toggleLanguage = toggleLanguage;
+window.showToast = showToast;

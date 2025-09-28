@@ -181,7 +181,7 @@ body {
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-primary)!important;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     text-decoration: none;
@@ -190,7 +190,7 @@ body {
 }
 
 [data-theme="light"] .contact-item {
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--bg-primary)!important;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -228,7 +228,7 @@ body {
 
 /* Enhanced Cards */
 .card {
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--bg-primary) !important;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
@@ -254,7 +254,6 @@ body {
 }
 
 .section-title {
-    font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
@@ -270,13 +269,13 @@ body {
 }
 .tech-stack-overview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 2fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
 .tech-category {
-    background: rgba(255, 255, 255, 0.03);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 1.5rem;
@@ -562,8 +561,9 @@ body {
 }
 
 .skill-category {
-    background: rgba(255, 255, 255, 0.03);
+    /*background: rgba(255, 255, 255, 0.03);*/
     border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
     border-radius: 16px;
     padding: 1.5rem;
 }
@@ -1135,9 +1135,9 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .tech-stack-overview {
-        grid-template-columns: 1fr;
-    }
+    /*.tech-stack-overview {*/
+    /*    grid-template-columns: 1fr;*/
+    /*}*/
 
     .floating-actions {
         bottom: 5rem;
@@ -1827,7 +1827,8 @@ body {
 }
 
 .hero-section {
-    background: var(--bg-secondary);
+    background: var(--bg-primary)!important;
+    /*background: var(--bg-secondary);*/
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 4rem 2rem;
@@ -1985,7 +1986,7 @@ body {
 
 .tech-stack-overview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 2fr));
     gap: 1.5rem;
 }
 
