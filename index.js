@@ -10,9 +10,10 @@ const sunSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 12C18 
 
 const moonSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path></svg>`;
 
-const frSVG = `<svg fill="currentColor" viewBox="0 0 24 24"><rect width="8" height="24" x="0" fill="#0055A4"/><rect width="8" height="24" x="8" fill="#fff"/><rect width="8" height="24" x="16" fill="#EF4135"/></svg>`;
+const frSVG = `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M1.9 32c0 13.1 8.4 24.2 20 28.3V3.7C10.3 7.8 1.9 18.9 1.9 32z" fill="#428bc1"></path><path d="M61.9 32c0-13.1-8.3-24.2-20-28.3v56.6c11.7-4.1 20-15.2 20-28.3" fill="#ed4c5c"></path><path d="M21.9 60.3c3.1 1.1 6.5 1.7 10 1.7s6.9-.6 10-1.7V3.7C38.8 2.6 35.5 2 31.9 2s-6.9.6-10 1.7v56.6" fill="#ffffff"></path></g></svg>`;
 
-const enSVG = `<svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#FFFFFF;" d="M395.901,7.286H116.099C56.003,7.286,7.286,56.004,7.286,116.099v279.803 c0,60.095,48.717,108.812,108.812,108.812h279.803c60.095,0,108.812-48.717,108.812-108.812V116.099 C504.714,56.004,455.997,7.286,395.901,7.286z"></path> <polygon style="fill:#ED1F34;" points="504.714,231.958 280.042,231.958 280.042,7.286 231.958,7.286 231.958,231.958 7.286,231.958 7.286,280.042 231.958,280.042 231.958,504.714 280.042,504.714 280.042,280.042 504.714,280.042 "></polygon> <path d="M395.901,0H116.099C52.082,0,0,52.082,0,116.099v279.803C0,459.918,52.082,512,116.099,512h279.803 C459.918,512,512,459.918,512,395.901V116.099C512,52.082,459.918,0,395.901,0z M497.427,116.099v108.572H287.329V14.573h108.573 C451.883,14.573,497.427,60.118,497.427,116.099z M116.099,14.573h108.573v210.098H14.573V116.099 C14.573,60.118,60.117,14.573,116.099,14.573z M14.573,395.901V287.329h210.098v210.098H116.099 C60.117,497.427,14.573,451.882,14.573,395.901z M395.901,497.427H287.329V287.329H438.39c4.024,0,7.287-3.262,7.287-7.286 c0-4.025-3.262-7.286-7.287-7.286H280.042c-4.024,0-7.286,3.262-7.286,7.286v217.384h-33.511V280.043 c0-4.025-3.262-7.286-7.286-7.286H14.573v-33.512h217.385c4.024,0,7.286-3.262,7.286-7.286V14.573h33.511v217.384 c0,4.025,3.262,7.286,7.286,7.286h217.385v33.512h-25.875c-4.024,0-7.286,3.262-7.286,7.286c0,4.025,3.262,7.286,7.286,7.286h25.875 v108.572C497.427,451.882,451.883,497.427,395.901,497.427z"></path> </g></svg>`;
+const enSVG = `<svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"></circle> <path style="fill:#D80027;" d="M509.833,222.609h-220.44h-0.001V2.167C278.461,0.744,267.317,0,256,0s-22.461,0.744-33.391,2.167 v220.44v0.001H2.167C0.744,233.539,0,244.681,0,256c0,11.319,0.744,22.461,2.167,33.391h220.44h0.001v220.442 C233.539,511.256,244.683,512,256,512s22.461-0.743,33.391-2.167v-220.44v-0.001h220.442C511.256,278.461,512,267.319,512,256 C512,244.681,511.256,233.539,509.833,222.609z"></path> </g></svg>`;
+
 
 // ========================================
 // INITIALIZATION
@@ -172,23 +173,96 @@ function initScrollAppBar() {
     }
 
     function updateActiveNavItem() {
-        const sections = document.querySelectorAll('section[id]');
+        // Chercher toutes les sections avec ID ET les éléments avec classe card
+        const sections = document.querySelectorAll('section[id], .hero-section, .card');
         let currentSection = '';
+        const scrollPos = window.pageYOffset + 150; // Offset pour une meilleure détection
+
+        // Créer un tableau des sections avec leurs informations
+        const sectionData = [];
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 200;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            const scrollPos = window.pageYOffset;
+            const rect = section.getBoundingClientRect();
+            const top = rect.top + window.pageYOffset;
+            const bottom = top + rect.height;
 
-            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                currentSection = section.id;
+            // Déterminer l'ID de la section
+            let sectionId = '';
+            if (section.id) {
+                sectionId = section.id;
+            } else if (section.classList.contains('hero-section')) {
+                sectionId = 'hero';
+            } else if (section.querySelector('.section-title')) {
+                // Essayer de déduire l'ID à partir du titre de la section
+                const titleText = section.querySelector('.section-title span')?.textContent?.toLowerCase() || '';
+                if (titleText.includes('technolog') || titleText.includes('stack')) {
+                    sectionId = 'technologies';
+                } else if (titleText.includes('expéri') || titleText.includes('experience')) {
+                    sectionId = 'experience';
+                } else if (titleText.includes('projet') || titleText.includes('project')) {
+                    sectionId = 'projects';
+                } else if (titleText.includes('contact')) {
+                    sectionId = 'contact';
+                }
+            }
+
+            if (sectionId) {
+                sectionData.push({
+                    id: sectionId,
+                    top: top,
+                    bottom: bottom,
+                    element: section
+                });
             }
         });
 
+        // Trier les sections par position
+        sectionData.sort((a, b) => a.top - b.top);
+
+        // Trouver la section actuellement visible
+        for (let i = 0; i < sectionData.length; i++) {
+            const section = sectionData[i];
+            const nextSection = sectionData[i + 1];
+
+            if (scrollPos >= section.top) {
+                if (!nextSection || scrollPos < nextSection.top) {
+                    currentSection = section.id;
+                    break;
+                }
+            }
+        }
+
+        // Si aucune section n'est détectée et qu'on est en haut de page
+        if (!currentSection && window.pageYOffset < 100) {
+            currentSection = 'hero';
+        }
+
+        // Console log pour débuggage
+        console.log('Current scroll position:', scrollPos);
+        console.log('Detected section:', currentSection);
+        console.log('Available sections:', sectionData.map(s => ({ id: s.id, top: s.top })));
+
+        // Mettre à jour les classes actives
         navItems.forEach(item => {
             item.classList.remove('active');
-            if (item.getAttribute('href') === '#' + currentSection) {
+            const href = item.getAttribute('href');
+
+            // Correspondances pour différents noms de sections
+            const sectionMap = {
+                '#hero': ['hero'],
+                '#profil': ['hero'],
+                '#technologies': ['technologies', 'tech-stack'],
+                '#experience': ['experience', 'exp'],
+                '#projects': ['projects', 'projet'],
+                '#contact': ['contact']
+            };
+
+            // Vérifier si cette navigation correspond à la section courante
+            const possibleSections = sectionMap[href] || [href.substring(1)];
+
+            if (possibleSections.includes(currentSection)) {
                 item.classList.add('active');
+                console.log('Activated nav item:', href, 'for section:', currentSection);
             }
         });
     }
@@ -982,7 +1056,7 @@ function showShortcutsModal() {
         </h3>
         <div style="display: flex; flex-direction: column; gap: 1rem;">
             ${shortcuts.map(shortcut => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">
                     <kbd style="background: var(--bg-secondary); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; color: var(--text-secondary);">${shortcut.key}</kbd>
                     <span style="color: var(--text-primary);">${shortcut.action}</span>
                 </div>
